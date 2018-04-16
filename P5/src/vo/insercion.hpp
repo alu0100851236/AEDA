@@ -27,7 +27,7 @@ class Insercion{
 
 		// METODOS
 		void setDato(T dato, int pos);
-		void ordenar ();
+		void ordenar (bool imprimir);
 		void mostrar ();
 };
 
@@ -47,41 +47,59 @@ void Insercion<T>::setDato(T dato, int pos)
 }
 
 template <class T>
-void Insercion<T>::ordenar()
+void Insercion<T>::ordenar(bool imprimir)
 {
 	int pos, aux;
-	cout << "Impresión del vector original" << endl;
-//	for (int i = 0; i < tam_vec; i++)
-//		{
-//			cout << datos[i] << ", ";
-//		}
-//	cout << endl;
-	mostrar();
 
 	for (int i = 0; i < tam_vec; i++){
 		pos = i;
 		aux = datos[i];
-		cout << "pos, " << pos << " | aux, " << aux << " | datos[pos-1],  " << datos[pos-1] << endl;
+//		cout << "pos, " << pos << " | aux, " << aux << " | datos[pos-1],  " << datos[pos-1] << endl;
 		while ((pos > 0) && (aux < datos[pos-1]))
 		{
-			cout << "Entro en el while en la iteración i, " << i << " y la posicion pos, " << pos << endl;
+//			cout << "Entro en el while en la iteración i, " << i << " y la posicion pos, " << pos << endl;
 			datos[pos] = datos[pos-1];
 			pos--;
 		}
 		datos[pos] = aux;
-		cout << "i = " << i << " , datos[" << pos << "] = " << datos[pos] << endl << endl;
+
+		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
+		if (imprimir == true)
+		{
+			cout << endl << "  # Iteración: " << i << endl;
+			mostrar();
+			cout << "  # Pulsar enter para continar" << endl;
+			string t;
+			getline(cin,t);
+		}
+		// ## FIN DE TRAZA
+//		cout << "i = " << i << " , datos[" << pos << "] = " << datos[pos] << endl << endl;
 	}
 }
 
 template <class T>
 void Insercion<T>::mostrar(){
-	cout << "Impresion del vector ordenado" << endl;
-
+	cout << "  # " ;
 	for (int i = 0; i < tam_vec; i++)
 	{
 		cout << setfill('0') << setw(8) << datos[i] << ", ";
 	}
-	cout << endl << endl;
+	cout << endl;
+//	cout << "  # " ;
+//	for (int i = 0; i < tam_vec; i++)
+//	{
+//		if (tam_vec > 10)
+//		{
+//			cout << "  # " << i + 1 << ".\t";
+//			for (int j = 0; j < 10; j++)
+//				cout << setfill('0') << setw(8) << datos[i + j] << ", ";
+//			cout << endl;
+//		}
+//		else
+//			cout << setfill('0') << setw(8) << datos[i] << ", ";
+//	}
+//	cout << endl;
+
 }
 
 //#endif /* VO_INSERCION_HPP_ */

@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <stdint.h>
 #include <vector>
-#include <ctime>
+#include <cstdlib>
+#include <string>
 
 //#endif /* COMMON_TYPES_HPP_ */

@@ -28,7 +28,7 @@ class QuickSort{
 		// METODOS
 		void setDato(T dato, int pos);
 		void baja (int pos, int n);
-		void ordenar (int i, int f);
+		void ordenar (int i, int f, bool imprimir);
 		void mostrar ();
 };
 
@@ -48,7 +48,7 @@ void QuickSort<T>::setDato(T dato, int pos)
 }
 
 template <class T>
-void QuickSort<T>::ordenar(int i, int f)
+void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 {
 	int ini = i, fin = f;
 	int piv = datos[(ini + fin) / 2];
@@ -68,28 +68,34 @@ void QuickSort<T>::ordenar(int i, int f)
 			datos[fin] = x;
 			ini++;
 			fin--;
+
+			// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
+			if (imprimir == true)
+			{
+				cout << endl << "  # El pivote es: " << piv << endl;
+				mostrar();
+				cout << "  # Pulsar enter para continar" << endl;
+				string t;
+				getline(cin,t);
+			}
 		}
 	}
 
 	if (i < fin)
-		ordenar(i, fin);
+		ordenar(i, fin, imprimir);
 
 	if (ini < f)
-		ordenar(ini, f);
+		ordenar(ini, f, imprimir);
 }
 
 template <class T>
 void QuickSort<T>::mostrar(){
-//	cout << "Impresion del vector ordenado" << endl;
-
+	cout << "  # " ;
 	for (int i = 0; i < tam_vec; i++)
 	{
-		cout << i + 1 << ".\t";
-		for (int j = 1; j <= 10; j++)
-			cout << setfill('0') << setw(8) << datos[i] << ", ";
-		cout << endl;
+		cout << setfill('0') << setw(8) << datos[i] << ", ";
 	}
-	cout << endl << endl;
+	cout << endl;
 }
 
 //#endif /* VO_QuickSort_HPP_ */

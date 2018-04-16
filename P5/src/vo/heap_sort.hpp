@@ -28,7 +28,7 @@ class Heap_Sort{
 		// METODOS
 		void setDato(T dato, int pos);
 		void baja (int pos, int n);
-		void ordenar ();
+		void ordenar (bool imprimir);
 		void mostrar ();
 };
 
@@ -73,7 +73,7 @@ void Heap_Sort<T>::baja (int pos, int n)
 //		cout << "## x = " << x << endl;
 		if (datos[h] <= x)
 		{
-			mostrar();
+//			mostrar();
 			break;
 		}
 		else
@@ -85,17 +85,29 @@ void Heap_Sort<T>::baja (int pos, int n)
 			pos = h;
 //			cout << "pos = h = " << pos << endl;
 		}
-		mostrar();
+//		mostrar();
 	}
 }
 
 template <class T>
-void Heap_Sort<T>::ordenar()
+void Heap_Sort<T>::ordenar(bool imprimir)
 {
 	for (int i = (tam_vec / 2) - 1; i >= 0; i--)
 	{
 //		cout << "i = pos = " << i << endl;
 		baja(i, tam_vec);
+
+		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
+		if (imprimir == true)
+		{
+			cout << endl << "  # INSERCIONES: ";
+			cout << endl << "  # Iteración: " << i << endl;
+			mostrar();
+			cout << "  # Pulsar enter para continar" << endl;
+			string t;
+			getline(cin,t);
+		}
+		// ## FIN DE TRAZA
 	}
 
 	for (int i = tam_vec - 1; i > 0; i--)
@@ -105,18 +117,27 @@ void Heap_Sort<T>::ordenar()
 		datos[0] = datos[i];
 		datos[i] = x;
 		baja(0, i-1);
+
+		if (imprimir == true)
+		{
+			cout << endl << "  # EXTRACCIONES: ";
+			cout << endl << "  # Iteración: " << i << endl;
+			mostrar();
+			cout << "  # Pulsar enter para continar" << endl;
+			string t;
+			getline(cin,t);
+		}
 	}
 }
 
 template <class T>
 void Heap_Sort<T>::mostrar(){
-//	cout << "Impresion del vector ordenado" << endl;
-
+	cout << "  # " ;
 	for (int i = 0; i < tam_vec; i++)
 	{
 		cout << setfill('0') << setw(8) << datos[i] << ", ";
 	}
-	cout << endl << endl;
+	cout << endl;
 }
 
 //#endif /* VO_HEAP_SORT_HPP_ */

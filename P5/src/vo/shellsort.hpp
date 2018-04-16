@@ -28,8 +28,8 @@ class ShellSort{
 		// METODOS
 		void setDato(T dato, int pos);
 		void baja (int pos, int n);
-		void ordenar (double alfa);
-		void deltasort(int delta);
+		void ordenar (double alfa, bool imprimir);
+		void deltasort(int delta, bool imprimir);
 		void mostrar ();
 };
 
@@ -49,14 +49,18 @@ void ShellSort<T>::setDato(T dato, int pos)
 }
 
 template <class T>
-void ShellSort<T>::ordenar(double alfa)
+void ShellSort<T>::ordenar(double alfa, bool imprimir)
 {
 	int delta = alfa * tam_vec;
 
 	while (delta >= 1)
 	{
-//		cout << "@ Ordenar, delta, " << delta << endl << endl;
-		deltasort(delta);
+		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
+		if (imprimir == true)
+			cout << endl << "  # Delta: " << delta << endl;
+		// ## FIN DE TRAZA
+
+		deltasort(delta, imprimir);
 //		cout << "@ Despues de deltasort, delta, " << delta << endl << endl;
 		delta = delta / 2;
 
@@ -64,14 +68,29 @@ void ShellSort<T>::ordenar(double alfa)
 }
 
 template <class T>
-void ShellSort<T>::deltasort(int delta)
+void ShellSort<T>::deltasort(int delta, bool imprimir)
 {
-	mostrar();
+//	mostrar();
 	for (int i = delta; i < tam_vec; i++)
 	{
 		int x = datos[i];
 		int j = i;
-//		cout << "datos[i]: " << datos[i] << " | datos[j - delta]: " << datos[j - delta] << " | en delta, " << delta << " | con j, " << j << endl;
+
+		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
+		if (imprimir == true)
+		{
+			cout << "    # - Subsecuencia " << i << ": " << endl;
+			cout << "    # - Número en la posición " << i << " es, " << datos[i] << endl;
+			cout << "    # - Número en la posición " << j - delta << " es, " << datos[j - delta] << endl;
+			cout << "  # - El vector en la subsecuencia " << i << " es, " << endl;
+			mostrar();
+			cout << "  # - Pulsar enter para continar" << endl;
+			string t;
+			getline(cin,t);
+		}
+		// ## FIN DE TRAZA
+
+//		<< " | datos[j - delta]: " << datos[j - delta] << " | en delta, " << delta << " | con j, " << j << endl;
 		while ((j >= delta) && (x < datos[j - delta]))
 		{
 //			cout << "## ENTRO EN EL WHILE ##" << endl;
@@ -89,21 +108,12 @@ void ShellSort<T>::deltasort(int delta)
 
 template <class T>
 void ShellSort<T>::mostrar(){
-//	cout << "Impresion del vector ordenado" << endl;
-
+	cout << "  # " ;
 	for (int i = 0; i < tam_vec; i++)
 	{
-		if (tam_vec > 10)
-		{
-			cout << i + 1 << ".\t";
-			for (int j = 1; j <= 10; j++)
-				cout << setfill('0') << setw(8) << datos[i] << ", ";
-			cout << endl;
-		}
-		else
-			cout << setfill('0') << setw(8) << datos[i] << ", ";
+		cout << setfill('0') << setw(8) << datos[i] << ", ";
 	}
-	cout << endl << endl;
+	cout << endl;
 }
 
 //#endif /* VO_ShellSort_HPP_ */

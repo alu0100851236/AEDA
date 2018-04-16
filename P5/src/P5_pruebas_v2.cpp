@@ -17,7 +17,7 @@
 using namespace std;
 
 int main() {
-	int opcion = 0, tam_vec = 0;
+	int opcion = 0, tam_vec = 0, modo = 0;
 	double alfa = 0.0;
 
 	cout << "*" << setfill('-') << setw(57) << "*" << endl;
@@ -29,7 +29,6 @@ int main() {
 
 	cout << "Tamaño para generar vector: ";
     cin >> tam_vec;
-    cout << endl;
 
     // # CREACIÓN DE LOS VECTORES SEGÚN LA MÉTODO DE ORDENACIÓN
 
@@ -39,101 +38,165 @@ int main() {
     QuickSort<DNI> vector_quicksort(tam_vec);
     ShellSort<DNI> vector_shellsort(tam_vec);
 
-	do{
-		cout << "Métodos de ordenacion:" << endl;
-		cout << "-----------------------" << endl;
-		cout << "1. Inserción" << endl;
-		cout << "2. Burbuja" << endl;
-		cout << "3. Heap Sort" << endl;
-		cout << "4. QuickSort" << endl;
-		cout << "5. ShellSort" << endl;
-		cout << "0. Salir" << endl;
-		cin >> opcion;
+    do{
+    		cout << endl << "*" << setfill('-') << setw(26) << "*" << endl;
+    		cout << "|  MODOS DE UTILIZACIÓN" << setfill(' ') << setw (4) << "|" << endl;
+    		cout << "| ----------------------- |" << endl;
+    		cout << "|  1. Modo Demostración" << setfill(' ') << setw (4) << "|" << endl;
+    		cout << "|  2. Modo Estadística" << setfill(' ') << setw (5) << "|" << endl;
+    		cout << "|  0. Salir" << setfill(' ') << setw (16) << "|" << endl;
+    		cout << "*" << setfill('-') << setw(26) << "*" << endl;
 
-		switch(opcion){
+    		cout << "Seleccione un modo de utilización: ";
+    		cin >> modo;
 
-			case 1:
-				{
-//					cout << "Entro en el case" << endl;
-					for(int i = 0 ; i < tam_vec ; i++)
-						{
-							DNI tmp_dni;
-							vector_insercion.setDato(tmp_dni.getDni(), i);
-						}
+    			switch(modo){
 
-					vector_insercion.ordenar();
-					vector_insercion.mostrar();
-					break;
-				}
+    				case 1:
+    				{
+    					do{
+    						cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
+    						cout << "  ||  MODO DEMOSTRACIÓN" << setfill(' ') << setw(4) << "||" << endl;
+    						cout << "  || ------------------- ||" << endl;
+    						cout << "  ||  1. Inserción" << setfill(' ') << setw(9) << "||" << endl;
+    						cout << "  ||  2. Burbuja" << setfill(' ') << setw(11) << "||" << endl;
+    						cout << "  ||  3. Heap Sort" << setfill(' ') << setw(9) << "||" << endl;
+    						cout << "  ||  4. QuickSort" << setfill(' ') << setw(9) << "||" << endl;
+    						cout << "  ||  5. ShellSort" << setfill(' ') << setw(9) << "||" << endl;
+    						cout << "  ||  0. Salir" << setfill(' ') << setw(13) << "||" << endl;
+    						cout << "  *" << setfill('=') << setw(24) << "*" << endl;
 
-			case 2:
-				{
-					for(int i = 0 ; i < tam_vec ; i++)
-						{
-							DNI tmp_dni;
-							vector_burbuja.setDato(tmp_dni.getDni(), i);
-						}
+    						cout << "  Seleccione una opción: ";
+    						cin >> opcion;
 
-					vector_burbuja.ordenar();
-					vector_burbuja.mostrar();
-					break;
-				}
+    						switch(opcion){
+    							case 1:
+    								{
+    									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_insercion.setDato(tmp_dni.getDni(), i);
+    										}
+    									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " INSERCIÓN " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
+    									cout << "  | VECTOR GENERADO:" << endl;
+    									vector_insercion.mostrar();
 
-			case 3:
-				{
-					for(int i = 0 ; i < tam_vec ; i++)
-						{
-							DNI tmp_dni;
-							vector_heap_sort.setDato(tmp_dni.getDni(), i);
-						}
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+    									vector_insercion.ordenar(true);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
 
-					cout << "Vector original: " << endl;
-					vector_heap_sort.mostrar();
-					vector_heap_sort.ordenar();
+    									cout << "  | VECTOR ORDENADO:" << endl;
+    									vector_insercion.mostrar();
+    									break;
+    								}
 
-					cout << "Vector ordenado: " << endl;
-					vector_heap_sort.mostrar();
-					break;
-				}
+    							case 2:
+    								{
+    									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_burbuja.setDato(tmp_dni.getDni(), i);
+    										}
 
-			case 4:
-				{
-					for(int i = 0 ; i < tam_vec ; i++)
-						{
-							DNI tmp_dni;
-							vector_quicksort.setDato(tmp_dni.getDni(), i);
-						}
+    									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " BURBUJA " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
+    									cout << "  | VECTOR GENERADO:" << endl;
+    									vector_burbuja.mostrar();
 
-					cout << "Vector original: " << endl;
-					vector_quicksort.mostrar();
-					vector_quicksort.ordenar(0, tam_vec - 1);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+    									vector_burbuja.ordenar(true);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
 
-					cout << "Vector ordenado: " << endl;
-					vector_quicksort.mostrar();
-					break;
-				}
+    									cout << "  | VECTOR ORDENADO:" << endl;
+    									vector_burbuja.mostrar();
+    									break;
+    								}
 
-			case 5:
-				{
-					cout << "# Introduzca el valor de alfa (0 < alfa < 1)" << endl;
-					cin >> alfa;
+    							case 3:
+    								{
+    									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_heap_sort.setDato(tmp_dni.getDni(), i);
+    										}
 
-					for(int i = 0 ; i < tam_vec ; i++)
-						{
-							DNI tmp_dni;
-							vector_shellsort.setDato(tmp_dni.getDni(), i);
-						}
+    									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " HEAP SORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
+    									cout << "  | VECTOR GENERADO:" << endl;
+    									vector_heap_sort.mostrar();
 
-					cout << "Vector original: " << endl;
-					vector_shellsort.mostrar();
-					vector_shellsort.ordenar(alfa);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+    									vector_heap_sort.ordenar(true);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
 
-					cout << "Vector ordenado: " << endl;
-					vector_shellsort.mostrar();
-					break;
-				}
-		}
-	} while (opcion != 0);
+    									cout << "  | VECTOR ORDENADO:" << endl;
+    									vector_heap_sort.mostrar();
+    									break;
+    								}
+
+    							case 4:
+    								{
+    									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_quicksort.setDato(tmp_dni.getDni(), i);
+    										}
+
+    									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " QUICKSORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
+    									cout << "  | VECTOR GENERADO:" << endl;
+    									vector_quicksort.mostrar();
+
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+    									vector_quicksort.ordenar(0, tam_vec - 1, true);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+
+    									cout << "  | VECTOR ORDENADO:" << endl;
+    									vector_quicksort.mostrar();
+    									break;
+    								}
+
+    							case 5:
+    								{
+    									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									cout << "# Introduzca el valor de alfa (0 < alfa < 1)" << endl;
+    									cin >> alfa;
+
+    									for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_shellsort.setDato(tmp_dni.getDni(), i);
+    										}
+
+    									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " SHELLSORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
+    									cout << "  | VECTOR GENERADO:" << endl;
+    									vector_shellsort.mostrar();
+
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+    									vector_shellsort.ordenar(alfa, true);
+    									cout << "  |" << setfill('-') << setw(tam_vec * 10) << "-|" << endl;
+
+    									cout << "  | VECTOR ORDENADO:" << endl;
+    									vector_shellsort.mostrar();
+    									break;
+    								}
+    						}
+    					} while (opcion != 0);
+    					break;
+    				}
+
+    				case 2:
+    				{
+					cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
+    					cout << "  ||  MODO ESTADÍSTICA" << setfill(' ') << setw(5) << "||" << endl;
+    					cout << "  *" << setfill('=') << setw(24) << "*" << endl;
+
+    					break;
+    				}
+    			}
+    } while (modo != 0);
+
 
 
 
