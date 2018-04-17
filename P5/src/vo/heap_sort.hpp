@@ -1,12 +1,10 @@
-/*
- * burbuja.hpp
- *
- *  Created on: 14 abr. 2018
- *      Author: david
- */
-
-//#ifndef VO_HEAP_SORT_HPP_
-//#define VO_HEAP_SORT_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -16,6 +14,7 @@ template <class T>
 class Heap_Sort{
 	private:
 		int tam_vec;
+		int comparaciones;
 		T* datos;
 
 	public:
@@ -30,11 +29,13 @@ class Heap_Sort{
 		void baja (int pos, int n);
 		void ordenar (bool imprimir);
 		void mostrar ();
+		int getComparaciones();
 };
 
 template <class T>
 Heap_Sort<T>::Heap_Sort(int tam):
 		tam_vec(tam),
+		comparaciones(0),
 		datos(new T[tam_vec])
 		{}
 
@@ -56,36 +57,44 @@ void Heap_Sort<T>::baja (int pos, int n)
 	{
 		int h1 = 2 * pos;
 		int h2 = h1 +1;
-//		cout << "## h1: " << h1 << endl;
-//		cout << "## h2: " << h2 << endl;
 		if (h1 == n)
+		{
 			h = h1;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
+		}
 		else if (datos[h1] > datos[h2])
 		{
-//			cout << "## datos[h1] = " << datos[h1] << endl;
-//			cout << "## datos[h2] = " << datos[h2] << endl;
 			h = h1;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
 		}
 		else
+		{
 			h = h2;
 
-//		cout << "## datos[h] = " << datos[h] << endl;
-//		cout << "## x = " << x << endl;
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
+		}
+
 		if (datos[h] <= x)
 		{
-//			mostrar();
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
+
 			break;
 		}
 		else
 		{
-//			cout << "## datos[pos] = " << datos[pos] << endl;
-//			cout << "## datos[h] = " << datos[h] << endl;
 			datos[pos] = datos[h];
 			datos[h] = x;
 			pos = h;
-//			cout << "pos = h = " << pos << endl;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
 		}
-//		mostrar();
 	}
 }
 
@@ -94,7 +103,6 @@ void Heap_Sort<T>::ordenar(bool imprimir)
 {
 	for (int i = (tam_vec / 2) - 1; i >= 0; i--)
 	{
-//		cout << "i = pos = " << i << endl;
 		baja(i, tam_vec);
 
 		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
@@ -112,7 +120,6 @@ void Heap_Sort<T>::ordenar(bool imprimir)
 
 	for (int i = tam_vec - 1; i > 0; i--)
 	{
-//		cout << "i = n = " << i << endl;
 		int x = datos[0];
 		datos[0] = datos[i];
 		datos[i] = x;
@@ -140,4 +147,8 @@ void Heap_Sort<T>::mostrar(){
 	cout << endl;
 }
 
-//#endif /* VO_HEAP_SORT_HPP_ */
+template <class T>
+int Heap_Sort<T>::getComparaciones()
+{
+	return comparaciones;
+}

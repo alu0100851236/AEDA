@@ -1,10 +1,10 @@
-/*
- * common_types.hpp
- *
- */
-
-//#ifndef COMMON_TYPES_HPP_
-//#define COMMON_TYPES_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #pragma once
 #include <iostream>
@@ -17,4 +17,3 @@
 #include <cstdlib>
 #include <string>
 
-//#endif /* COMMON_TYPES_HPP_ */

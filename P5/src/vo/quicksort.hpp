@@ -1,12 +1,10 @@
-/*
- * burbuja.hpp
- *
- *  Created on: 14 abr. 2018
- *      Author: david
- */
-
-//#ifndef VO_QuickSort_HPP_
-//#define VO_QuickSort_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -16,6 +14,7 @@ template <class T>
 class QuickSort{
 	private:
 		int tam_vec;
+		int comparaciones;
 		T* datos;
 
 	public:
@@ -30,11 +29,13 @@ class QuickSort{
 		void baja (int pos, int n);
 		void ordenar (int i, int f, bool imprimir);
 		void mostrar ();
+		int getComparaciones();
 };
 
 template <class T>
 QuickSort<T>::QuickSort(int tam):
 		tam_vec(tam),
+		comparaciones(0),
 		datos(new T[tam_vec])
 		{}
 
@@ -52,14 +53,23 @@ void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 {
 	int ini = i, fin = f;
 	int piv = datos[(ini + fin) / 2];
-//	cout << "ini: " << ini << " | fin: " << fin << " | piv: " << piv << endl;
 	while (ini <= fin)
 	{
 		while (datos[ini] < piv)
+		{
 			ini++;
 
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
+		}
+
 		while (datos[fin] > piv)
+		{
 			fin--;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
+		}
 
 		if (ini <= fin)
 		{
@@ -68,6 +78,9 @@ void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 			datos[fin] = x;
 			ini++;
 			fin--;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
 
 			// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
 			if (imprimir == true)
@@ -82,10 +95,20 @@ void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 	}
 
 	if (i < fin)
+	{
 		ordenar(i, fin, imprimir);
 
+		// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+		comparaciones++;
+	}
+
 	if (ini < f)
+	{
 		ordenar(ini, f, imprimir);
+
+		// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+		comparaciones++;
+	}
 }
 
 template <class T>
@@ -98,4 +121,8 @@ void QuickSort<T>::mostrar(){
 	cout << endl;
 }
 
-//#endif /* VO_QuickSort_HPP_ */
+template <class T>
+int QuickSort<T>::getComparaciones()
+{
+	return comparaciones;
+}

@@ -1,12 +1,10 @@
-/*
- * burbuja.hpp
- *
- *  Created on: 14 abr. 2018
- *      Author: david
- */
-
-//#ifndef VO_ShellSort_HPP_
-//#define VO_ShellSort_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -16,6 +14,7 @@ template <class T>
 class ShellSort{
 	private:
 		int tam_vec;
+		int comparaciones;
 		T* datos;
 
 	public:
@@ -31,11 +30,13 @@ class ShellSort{
 		void ordenar (double alfa, bool imprimir);
 		void deltasort(int delta, bool imprimir);
 		void mostrar ();
+		int getComparaciones ();
 };
 
 template <class T>
 ShellSort<T>::ShellSort(int tam):
 		tam_vec(tam),
+		comparaciones(0),
 		datos(new T[tam_vec])
 		{}
 
@@ -55,22 +56,22 @@ void ShellSort<T>::ordenar(double alfa, bool imprimir)
 
 	while (delta >= 1)
 	{
+		// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+		comparaciones++;
+
 		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
 		if (imprimir == true)
 			cout << endl << "  # Delta: " << delta << endl;
 		// ## FIN DE TRAZA
 
 		deltasort(delta, imprimir);
-//		cout << "@ Despues de deltasort, delta, " << delta << endl << endl;
 		delta = delta / 2;
-
 	}
 }
 
 template <class T>
 void ShellSort<T>::deltasort(int delta, bool imprimir)
 {
-//	mostrar();
 	for (int i = delta; i < tam_vec; i++)
 	{
 		int x = datos[i];
@@ -90,16 +91,13 @@ void ShellSort<T>::deltasort(int delta, bool imprimir)
 		}
 		// ## FIN DE TRAZA
 
-//		<< " | datos[j - delta]: " << datos[j - delta] << " | en delta, " << delta << " | con j, " << j << endl;
 		while ((j >= delta) && (x < datos[j - delta]))
 		{
-//			cout << "## ENTRO EN EL WHILE ##" << endl;
-//			cout << "## - datos[j]: " << datos[j] << endl;
-//			cout << "## - datos[i]: " << datos[i] << endl;
 			datos[j] = datos[j - delta];
-//			cout << "## - datos[j - delta]: " << datos[j - delta] << " | en [j - delta], " << j - delta << endl;
 			j = j - delta;
-//			cout << "## - j = " << j  << endl << endl;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
 		}
 
 		datos[j] = x;
@@ -116,4 +114,8 @@ void ShellSort<T>::mostrar(){
 	cout << endl;
 }
 
-//#endif /* VO_ShellSort_HPP_ */
+template <class T>
+int ShellSort<T>::getComparaciones()
+{
+	return comparaciones;
+}

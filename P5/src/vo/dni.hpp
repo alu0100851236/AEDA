@@ -1,8 +1,10 @@
-/*
- * dni.hpp
- *
- *  Created on: 26 mar. 2018
- */
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -26,9 +28,6 @@ class DNI{
     int getDni();
     bool operator==(DNI& dni);
     bool operator==(int& dni);
-    // operator unsingned long() const {
-    //   usingned long tmp = (unsingned long)numero_;
-    //   return tmp;} 
     operator int();
 
 };

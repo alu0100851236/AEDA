@@ -1,12 +1,10 @@
-/*
- * burbuja.hpp
- *
- *  Created on: 14 abr. 2018
- *      Author: david
- */
-
-//#ifndef VO_BURBUJA_HPP_
-//#define VO_BURBUJA_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -16,6 +14,7 @@ template <class T>
 class Burbuja{
 	private:
 		int tam_vec;
+		int comparaciones;
 		T 	*datos;
 
 	public:
@@ -29,11 +28,13 @@ class Burbuja{
 		void setDato(T dato, int pos);
 		void ordenar (bool imprimir);
 		void mostrar ();
+		int getComparaciones ();
 };
 
 template <class T>
 Burbuja<T>::Burbuja(int tam):
 		tam_vec(tam),
+		comparaciones(0),
 		datos(new T[tam_vec])
 		{}
 
@@ -49,9 +50,6 @@ void Burbuja<T>::setDato(T dato, int pos)
 template <class T>
 void Burbuja<T>::ordenar(bool imprimir)
 {
-	// ### Se van comparando pares de elementos hasta que el elemento burbuja no se mueva más,
-	// ### después se sigue haciendo comparaciones con el siguiente elemento
-
 	int bur, aux;
 
 	for (int i = 1; i < tam_vec; i++){
@@ -62,6 +60,9 @@ void Burbuja<T>::ordenar(bool imprimir)
 				aux = datos[j-1];
 				datos[j-1] = datos[j];
 				datos[j] = aux;
+
+				// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+				comparaciones++;
 
 				// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
 				if (imprimir == true)
@@ -89,4 +90,8 @@ void Burbuja<T>::mostrar(){
 	cout << endl;
 }
 
-//#endif /* VO_BURBUJA_HPP_ */
+template <class T>
+int Burbuja<T>::getComparaciones()
+{
+	return comparaciones;
+}

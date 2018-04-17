@@ -1,12 +1,10 @@
-/*
- * insercion.hpp
- *
- *  Created on: 14 abr. 2018
- *      Author: david
- */
-
-//#ifndef VO_INSERCION_HPP_
-//#define VO_INSERCION_HPP_
+//============================================================================
+// Author      	: David Dorta Acosta
+// email       	: alu0100851236@ull.edu.es
+// Asignatura  	: Algoritmos y Estructura de Datos Avanzadas
+// Curso			: 2017-2018
+// Práctica 5	: Implementación de métodos de ordenación
+//============================================================================
 
 #include "common_types.hpp"
 
@@ -16,6 +14,7 @@ template <class T>
 class Insercion{
 	private:
 		int tam_vec;
+		int comparaciones;
 		T 	*datos;
 
 	public:
@@ -29,11 +28,13 @@ class Insercion{
 		void setDato(T dato, int pos);
 		void ordenar (bool imprimir);
 		void mostrar ();
+		int getComparaciones ();
 };
 
 template <class T>
 Insercion<T>::Insercion(int tam):
 		tam_vec(tam),
+		comparaciones(0),
 		datos(new T[tam_vec])
 		{}
 
@@ -54,12 +55,13 @@ void Insercion<T>::ordenar(bool imprimir)
 	for (int i = 0; i < tam_vec; i++){
 		pos = i;
 		aux = datos[i];
-//		cout << "pos, " << pos << " | aux, " << aux << " | datos[pos-1],  " << datos[pos-1] << endl;
 		while ((pos > 0) && (aux < datos[pos-1]))
 		{
-//			cout << "Entro en el while en la iteración i, " << i << " y la posicion pos, " << pos << endl;
 			datos[pos] = datos[pos-1];
 			pos--;
+
+			// ## CONTADOR DE LAS COMPARACIONES PARA LAS ESTADÍSTICAS
+			comparaciones++;
 		}
 		datos[pos] = aux;
 
@@ -73,7 +75,6 @@ void Insercion<T>::ordenar(bool imprimir)
 			getline(cin,t);
 		}
 		// ## FIN DE TRAZA
-//		cout << "i = " << i << " , datos[" << pos << "] = " << datos[pos] << endl << endl;
 	}
 }
 
@@ -85,21 +86,10 @@ void Insercion<T>::mostrar(){
 		cout << setfill('0') << setw(8) << datos[i] << ", ";
 	}
 	cout << endl;
-//	cout << "  # " ;
-//	for (int i = 0; i < tam_vec; i++)
-//	{
-//		if (tam_vec > 10)
-//		{
-//			cout << "  # " << i + 1 << ".\t";
-//			for (int j = 0; j < 10; j++)
-//				cout << setfill('0') << setw(8) << datos[i + j] << ", ";
-//			cout << endl;
-//		}
-//		else
-//			cout << setfill('0') << setw(8) << datos[i] << ", ";
-//	}
-//	cout << endl;
-
 }
 
-//#endif /* VO_INSERCION_HPP_ */
+template <class T>
+int Insercion<T>::getComparaciones()
+{
+	return comparaciones;
+}
