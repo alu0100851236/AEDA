@@ -496,8 +496,5 @@ int main() {
     			}
     } while (modo != 0);
 
-
-
-
-	return 0;
+    return 0;
 }
