@@ -74,15 +74,15 @@ void ShellSort<T>::deltasort(int delta, bool imprimir)
 {
 	for (int i = delta; i < tam_vec; i++)
 	{
-		int x = datos[i];
+		T x = datos[i];
 		int j = i;
 
 		// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
 		if (imprimir == true)
 		{
 			cout << "    # - Subsecuencia " << i << ": " << endl;
-			cout << "    # - Número en la posición " << i << " es, " << datos[i] << endl;
-			cout << "    # - Número en la posición " << j - delta << " es, " << datos[j - delta] << endl;
+			cout << "    # - Número en la posición " << i << " es, " << setfill('0') << setw(8) << datos[i] << endl;
+			cout << "    # - Número en la posición " << j - delta << " es, " << setfill('0') << setw(8) << datos[j - delta] << endl;
 			cout << "  # - El vector en la subsecuencia " << i << " es, " << endl;
 			mostrar();
 			cout << "  # - Pulsar enter para continar" << endl;

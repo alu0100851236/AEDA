@@ -52,7 +52,7 @@ template <class T>
 void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 {
 	int ini = i, fin = f;
-	int piv = datos[(ini + fin) / 2];
+	T piv = datos[(ini + fin) / 2];
 	while (ini <= fin)
 	{
 		while (datos[ini] < piv)
@@ -73,7 +73,7 @@ void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 
 		if (ini <= fin)
 		{
-			int x = datos[ini];
+			T x = datos[ini];
 			datos[ini] = datos[fin];
 			datos[fin] = x;
 			ini++;
@@ -85,7 +85,7 @@ void QuickSort<T>::ordenar(int i, int f, bool imprimir)
 			// ## MOSTRAR TRAZA PARA EL MODO DEMOSTRACIÓN
 			if (imprimir == true)
 			{
-				cout << endl << "  # El pivote es: " << piv << endl;
+				cout << endl << "  # El pivote es: " << setfill('0') << setw(8) << piv << endl;
 				mostrar();
 				cout << "  # Pulsar enter para continar" << endl;
 				string t;

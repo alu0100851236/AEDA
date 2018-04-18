@@ -7,7 +7,7 @@
 //============================================================================
 
 #include "common_types.hpp"
-
+//#include "dni.hpp"
 using namespace std;
 
 template <class T>
@@ -50,11 +50,11 @@ void Insercion<T>::setDato(T dato, int pos)
 template <class T>
 void Insercion<T>::ordenar(bool imprimir)
 {
-	int pos, aux;
+	int pos;
 
 	for (int i = 0; i < tam_vec; i++){
 		pos = i;
-		aux = datos[i];
+		T aux = datos[i];
 		while ((pos > 0) && (aux < datos[pos-1]))
 		{
 			datos[pos] = datos[pos-1];

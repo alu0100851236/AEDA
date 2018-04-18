@@ -43,6 +43,9 @@ int main() {
 
     				case 1:
     				{
+    					cout << "Tamaño del vector a ordenar: ";
+    					cin >> tam_vec;
+
     					// # CREACIÓN DE LOS VECTORES SEGÚN SU MÉTODO DE ORDENACIÓN
 
     					Insercion<DNI> vector_insercion(tam_vec);
@@ -51,8 +54,6 @@ int main() {
     					QuickSort<DNI> vector_quicksort(tam_vec);
     					ShellSort<DNI> vector_shellsort(tam_vec);
 
-    					cout << "Tamaño del vector a ordenar: ";
-    					cin >> tam_vec;
 
     					do{
     						cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
@@ -73,11 +74,44 @@ int main() {
     							case 1:
     								{
     									// ## LLENO EL VECTOR CON EL TDATO DNI
-    									for(int i = 0 ; i < tam_vec ; i++)
+    									char opt = 'X';
+    									cout << "  # ¿Generar banco de DNI manualmente? (S,s) | (N,n): ";
+    									cin >> opt;
+
+    									if ((opt == 'S') or (opt == 's'))
     									{
-    										DNI tmp_dni;
-    										vector_insercion.setDato(tmp_dni.getDni(), i);
+    										int dni_aux = 0;
+    										char letra = ' ';
+    										string nombre = " ";
+
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+
+    											cout << endl << "  # Registro número " << i << endl;
+    											cout << "   > Inserte el DNI: ";
+    											cin >> dni_aux;
+
+    											cout << "   > Inserte la letra del DNI: ";
+    											cin >> letra;
+
+    											cout << "   > Inserte el nombre: ";
+    											cin >> nombre;
+
+    											tmp_dni.setDni(dni_aux, letra, nombre);
+
+    											vector_insercion.setDato(tmp_dni, i);
+    										}
     									}
+    									else if ((opt == 'N') or (opt == 'n'))
+    									{
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    										    vector_insercion.setDato(tmp_dni, i);
+    										}
+    									}
+
     									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " INSERCIÓN " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
     									cout << "  | VECTOR GENERADO:" << endl;
     									vector_insercion.mostrar();
@@ -94,10 +128,42 @@ int main() {
     							case 2:
     								{
     									// ## LLENO EL VECTOR CON EL TDATO DNI
-    									for(int i = 0 ; i < tam_vec ; i++)
+    									char opt = 'X';
+    									cout << "  # ¿Generar banco de DNI manualmente? (S,s) | (N,n): ";
+    									cin >> opt;
+
+    									if ((opt == 'S') or (opt == 's'))
     									{
-    										DNI tmp_dni;
-    										vector_burbuja.setDato(tmp_dni.getDni(), i);
+    										int dni_aux = 0;
+    										char letra = ' ';
+    										string nombre = " ";
+
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+
+    											cout << endl << "  # Registro número " << i << endl;
+    											cout << "   > Inserte el DNI: ";
+    											cin >> dni_aux;
+
+    											cout << "   > Inserte la letra del DNI: ";
+    											cin >> letra;
+
+    											cout << "   > Inserte el nombre: ";
+    											cin >> nombre;
+
+    											tmp_dni.setDni(dni_aux, letra, nombre);
+
+    											vector_burbuja.setDato(tmp_dni, i);
+    										}
+    									}
+    									else if ((opt == 'N') or (opt == 'n'))
+    									{
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_burbuja.setDato(tmp_dni, i);
+    										}
     									}
 
     									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " BURBUJA " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
@@ -116,10 +182,42 @@ int main() {
     							case 3:
     								{
     									// ## LLENO EL VECTOR CON EL TDATO DNI
-    									for(int i = 0 ; i < tam_vec ; i++)
+    									char opt = 'X';
+    									cout << "  # ¿Generar banco de DNI manualmente? (S,s) | (N,n): ";
+    									cin >> opt;
+
+    									if ((opt == 'S') or (opt == 's'))
     									{
-    										DNI tmp_dni;
-    										vector_heap_sort.setDato(tmp_dni.getDni(), i);
+    										int dni_aux = 0;
+    										char letra = ' ';
+    										string nombre = " ";
+
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+
+    											cout << endl << "  # Registro número " << i << endl;
+    											cout << "   > Inserte el DNI: ";
+    											cin >> dni_aux;
+
+    											cout << "   > Inserte la letra del DNI: ";
+    											cin >> letra;
+
+    											cout << "   > Inserte el nombre: ";
+    											cin >> nombre;
+
+    											tmp_dni.setDni(dni_aux, letra, nombre);
+
+    											vector_heap_sort.setDato(tmp_dni, i);
+    										}
+    									}
+    									else if ((opt == 'N') or (opt == 'n'))
+    									{
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_heap_sort.setDato(tmp_dni, i);
+    										}
     									}
 
     									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " HEAP SORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
@@ -138,10 +236,42 @@ int main() {
     							case 4:
     								{
     									// ## LLENO EL VECTOR CON EL TDATO DNI
-    									for(int i = 0 ; i < tam_vec ; i++)
+    									char opt = 'X';
+    									cout << "  # ¿Generar banco de DNI manualmente? (S,s) | (N,n): ";
+    									cin >> opt;
+
+    									if ((opt == 'S') or (opt == 's'))
     									{
-    										DNI tmp_dni;
-    										vector_quicksort.setDato(tmp_dni.getDni(), i);
+    										int dni_aux = 0;
+    										char letra = ' ';
+    										string nombre = " ";
+
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+
+    											cout << endl << "  # Registro número " << i << endl;
+    											cout << "   > Inserte el DNI: ";
+    											cin >> dni_aux;
+
+    											cout << "   > Inserte la letra del DNI: ";
+    											cin >> letra;
+
+    											cout << "   > Inserte el nombre: ";
+    											cin >> nombre;
+
+    											tmp_dni.setDni(dni_aux, letra, nombre);
+
+    											vector_quicksort.setDato(tmp_dni, i);
+    										}
+    									}
+    									else if ((opt == 'N') or (opt == 'n'))
+    									{
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_quicksort.setDato(tmp_dni, i);
+    										}
     									}
 
     									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " QUICKSORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
@@ -160,13 +290,46 @@ int main() {
     							case 5:
     								{
     									// ## LLENO EL VECTOR CON EL TDATO DNI
+    									char opt = 'X';
+
     									cout << "# Introduzca el valor de alfa (0 < alfa < 1)" << endl;
     									cin >> alfa;
 
-    									for(int i = 0 ; i < tam_vec ; i++)
+    									cout << "  # ¿Generar banco de DNI manualmente? (S,s) | (N,n): ";
+    									cin >> opt;
+
+    									if ((opt == 'S') or (opt == 's'))
     									{
-    										DNI tmp_dni;
-    										vector_shellsort.setDato(tmp_dni.getDni(), i);
+    										int dni_aux = 0;
+    										char letra = ' ';
+    										string nombre = " ";
+
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+
+    											cout << endl << "  # Registro número " << i << endl;
+    											cout << "   > Inserte el DNI: ";
+    											cin >> dni_aux;
+
+    											cout << "   > Inserte la letra del DNI: ";
+    											cin >> letra;
+
+    											cout << "   > Inserte el nombre: ";
+    											cin >> nombre;
+
+    											tmp_dni.setDni(dni_aux, letra, nombre);
+
+    											vector_shellsort.setDato(tmp_dni, i);
+    										}
+    									}
+    									else if ((opt == 'N') or (opt == 'n'))
+    									{
+    										for(int i = 0 ; i < tam_vec ; i++)
+    										{
+    											DNI tmp_dni;
+    											vector_shellsort.setDato(tmp_dni, i);
+    										}
     									}
 
     									cout << endl << "  |" << setfill('=') << setw((tam_vec * 10) / 2) << " SHELLSORT " << setfill('=') << setw((tam_vec * 10) / 2) << "=|" << endl;
@@ -190,22 +353,7 @@ int main() {
     				{
     					int nPruebas;
 
-    					// ## INCIALIZACIÓN DE CONTADORES PARA LAS ESTADÍSTICAS
-					int max_insercion	= 0, min_insercion	= 2147483647, suma_insercion	= 0, media_insercion	= 0;
-					int max_burbuja 	  	= 0, min_burbuja		= 2147483647, suma_burbuja 	= 0, media_burbuja	= 0;
-					int max_heap_sort	= 0, min_heap_sort 	= 2147483647, suma_heap_sort	= 0, media_heap_sort	= 0;
-					int max_quicksort 	= 0, min_quicksort 	= 2147483647, suma_quicksort	= 0, media_quicksort	= 0;
-    					int max_shellsort 	= 0, min_shellsort 	= 2147483647, suma_shellsort	= 0, media_shellsort	= 0;
-
-    					// ## CREACIÓN DE LOS VECTORES SEGÚN SU MÉTODO DE ORDENACIÓN
-
-    					Insercion<DNI> vector_insercion_est(tam_vec);
-    					Burbuja<DNI> vector_burbuja_est(tam_vec);
-    					Heap_Sort<DNI> vector_heap_sort_est(tam_vec);
-    					QuickSort<DNI> vector_quicksort_est(tam_vec);
-    					ShellSort<DNI> vector_shellsort_est(tam_vec);
-
-					cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
+    					cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
     					cout << "  ||  MODO ESTADÍSTICA" << setfill(' ') << setw(5) << "||" << endl;
     					cout << "  *" << setfill('=') << setw(24) << "*" << endl;
 
@@ -217,6 +365,21 @@ int main() {
 
     					cout << "  # Introduzca el valor de alfa (0 < alfa < 1): ";
     					cin >> alfa;
+
+    					// ## INCIALIZACIÓN DE CONTADORES PARA LAS ESTADÍSTICAS
+    					int max_insercion	= 0, min_insercion	= 2147483647, suma_insercion	= 0, media_insercion	= 0;
+    					int max_burbuja 	  	= 0, min_burbuja		= 2147483647, suma_burbuja 	= 0, media_burbuja	= 0;
+    					int max_heap_sort	= 0, min_heap_sort 	= 2147483647, suma_heap_sort	= 0, media_heap_sort	= 0;
+    					int max_quicksort 	= 0, min_quicksort 	= 2147483647, suma_quicksort	= 0, media_quicksort	= 0;
+    					int max_shellsort 	= 0, min_shellsort 	= 2147483647, suma_shellsort	= 0, media_shellsort	= 0;
+
+    					// ## CREACIÓN DE LOS VECTORES SEGÚN SU MÉTODO DE ORDENACIÓN
+
+    					Insercion<DNI> vector_insercion_est(tam_vec);
+    					Burbuja<DNI> vector_burbuja_est(tam_vec);
+    					Heap_Sort<DNI> vector_heap_sort_est(tam_vec);
+    					QuickSort<DNI> vector_quicksort_est(tam_vec);
+    					ShellSort<DNI> vector_shellsort_est(tam_vec);
 
     					// ## EMPEZAMOS A REALIZAR LAS PRUEBAS
     					for(int p = 0 ; p < nPruebas ; p++)

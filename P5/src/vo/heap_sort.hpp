@@ -51,8 +51,8 @@ void Heap_Sort<T>::setDato(T dato, int pos)
 template <class T>
 void Heap_Sort<T>::baja (int pos, int n)
 {
-	int x = 0, h = 0;
-	x = datos[pos];
+	int h = 0;
+	T x = datos[pos];
 	while (2 * pos <= n)
 	{
 		int h1 = 2 * pos;
@@ -120,7 +120,7 @@ void Heap_Sort<T>::ordenar(bool imprimir)
 
 	for (int i = tam_vec - 1; i > 0; i--)
 	{
-		int x = datos[0];
+		T x = datos[0];
 		datos[0] = datos[i];
 		datos[i] = x;
 		baja(0, i-1);

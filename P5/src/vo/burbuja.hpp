@@ -50,14 +50,14 @@ void Burbuja<T>::setDato(T dato, int pos)
 template <class T>
 void Burbuja<T>::ordenar(bool imprimir)
 {
-	int bur, aux;
+
 
 	for (int i = 1; i < tam_vec; i++){
 		for (int j = tam_vec -1; j >= i; j--){
-			bur = datos[j-1];
+			T bur = datos[j-1];
 			if (datos[j] < datos[j-1]) {
 				bur = datos[j];
-				aux = datos[j-1];
+				T aux = datos[j-1];
 				datos[j-1] = datos[j];
 				datos[j] = aux;
 
@@ -68,7 +68,7 @@ void Burbuja<T>::ordenar(bool imprimir)
 				if (imprimir == true)
 				{
 					cout << endl << "  # Iteración: " << i << endl;
-					cout << "  # Elemento Burbuja, " << bur << " se cambia por " << aux << endl;
+					cout << "  # Elemento Burbuja, " << setfill('0') << setw(8) << bur << " se cambia por " << setfill('0') << setw(8) << aux << endl;
 					mostrar();
 					cout << "  # Pulsar enter para continar" << endl;
 					string t;
