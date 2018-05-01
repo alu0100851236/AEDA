@@ -14,7 +14,7 @@ using namespace std;
 
 int main(){
 	ABB<DNI> arbol;
-	//ABB<DNI> arbolPruebas;
+	ABB<DNI> arbolPruebas;
 	int modo, opcion, dni;
 	DNI valor_dni;
 	valor_dni.setDni(0);
@@ -62,8 +62,8 @@ int main(){
     										cout << "  -> Nivel 0: [.]" << endl;
     									}
 
-    									cout << "  =============" << endl;
-    									cout << "  # INSERTAR DNI: ";
+    									cout << "  ================" << endl;
+    									cout << "  # DNI A INSERTAR: ";
     									cin >> dni;
     									valor_dni.setDni(dni);
     									arbol.insertar(valor_dni, false);
@@ -72,9 +72,103 @@ int main(){
 
     									break;
     								}
+    							case 2:
+    								{
+    									cout << "  ================" << endl;
+    									cout << "  # DNI A ELIMINAR: ";
+    									cin >> dni;
+    									valor_dni.setDni(dni);
+    									arbol.eliminar(valor_dni);
+    									arbol.verArbol();
+    									cout << endl;
+
+    									break;
+    								}
     						}
     					} while  (opcion != 0);
     					break;
+    				}
+
+    				case 2:
+    				{
+    					int nPruebas, tam_arbol;
+
+    					// ## INCIALIZACIÓN DE VARIABLES PARA LAS ESTADÍSTICAS
+    					int max_busqueda	  	= 0, min_busqueda	= 2147483647, suma_busqueda 	= 0, media_busqueda	= 0;
+    					int max_insercion	= 0, min_insercion	= 2147483647, suma_insercion	= 0, media_insercion	= 0;
+
+    					cout << endl << "  *" << setfill('=') << setw(24) << "*" << endl;
+    					cout << "  ||  MODO ESTADÍSTICA" << setfill(' ') << setw(5) << "||" << endl;
+    					cout << "  *" << setfill('=') << setw(24) << "*" << endl;
+
+    					cout << "  # Tamaño del árbol: ";
+    					cin >> tam_arbol;
+
+    					cout << "  # Introduce el número de pruebas a realizar: ";
+    					cin >> nPruebas;
+
+    					// ## CREACIÓN DEL BANCO DE PRUEBAS
+    					DNI* vector_pruebas;
+    					vector_pruebas = new DNI[2 * tam_arbol];
+
+    					for (int i = 0; i < (2 * tam_arbol); i++){
+    						DNI dni_aux;
+    						vector_pruebas[i] = dni_aux;
+    					}
+
+    					// ## CREACIÓN DEL ÁRBOL ABB E INSERCIÓN DE LOS N PRIMEROS VALORES
+    					for (int i = 0; i < (tam_arbol / 2); i++)
+    						arbolPruebas.insertar(vector_pruebas[i], false);
+
+    					// ## ESTADÍSTICAS PARA LA BÚSQUEDA
+    					for (int i = 0; i < nPruebas; i++){
+    						arbolPruebas.setNumBusqueda(0);
+    						int indice_aleatorio = rand() % (tam_arbol / 2);
+
+    						arbolPruebas.buscar(vector_pruebas[indice_aleatorio]);
+
+    						suma_busqueda += arbolPruebas.getNumBusqueda();
+
+    						if (arbolPruebas.getNumBusqueda() < min_busqueda)
+    								min_busqueda = arbolPruebas.getNumBusqueda();
+
+    						if (arbolPruebas.getNumBusqueda() > max_busqueda)
+    								max_busqueda = arbolPruebas.getNumBusqueda();
+    					}
+
+    					// ## ESTADÍSTICAS PARA LA INSERCIÓN
+    					for (int i = 0; i < nPruebas; i++){
+    						arbolPruebas.setNumInsercion(0);
+    						int indice_aleatorio = rand() % (tam_arbol / 2);
+
+    						arbolPruebas.insertar(vector_pruebas[indice_aleatorio], true);
+
+    						suma_insercion += arbolPruebas.getNumInsercion();
+
+    						// ## MÍNIMO
+    						if (arbolPruebas.getNumInsercion() < min_insercion)
+    								min_insercion = arbolPruebas.getNumInsercion();
+
+    						// ## MÁXIMO
+    						if (arbolPruebas.getNumInsercion() > max_insercion)
+    								max_insercion = arbolPruebas.getNumInsercion();
+    					}
+
+    					// ## CALCULOS DE LAS MEDIAS
+    					media_busqueda = suma_busqueda / nPruebas;
+    					media_insercion = suma_insercion / nPruebas;
+
+    					// ## MOSTRAR LOS RESULTADOS POR PANTALLA
+    					int a_m = 8;
+
+    					cout << endl << endl << setfill(' ') << setw(45) << "--- NÚMERO DE COMPARACIONES ---" << endl;
+    					cout << setfill(' ') << setw(15) 				<< "N" << setfill(' ')       << setw(9)   << " | " << setfill(' ') << setw(10)  << "Pruebas" << setfill(' ') << setw(6)   << " | " << setfill(' ') << setw(10)  << "Mínimo" << setfill(' ') 	     << setw(7)   << " | " << setfill(' ') << setw(9)   << "Medio" << setfill(' ')		 << setw(7)	 << " | " << setfill(' ') << setw(10)  << "Máximo" << endl;
+    					cout << "INSERCIÓN: " << setfill(' ') << setw(5) << tam_arbol << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << nPruebas << setfill(' ')  << setw(a_m) << " | " << setfill(' ') << setw(a_m) << min_insercion << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << media_insercion << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << max_insercion << endl;
+    					cout << "BÚSQUEDA : " << setfill(' ') << setw(5) << tam_arbol << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << nPruebas << setfill(' ')  << setw(a_m) << " | " << setfill(' ') << setw(a_m) << min_busqueda  << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << media_busqueda  << setfill(' ') << setw(a_m) << " | " << setfill(' ') << setw(a_m) << max_busqueda  << endl;
+    					cout << endl;
+
+    					break;
+
     				}
     			}
     } while (modo != 0);

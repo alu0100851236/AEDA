@@ -11,8 +11,8 @@
 #include <ctime>
 
 DNI::DNI():
-numero_(00000000 + rand() % (99999999 + 1))
-//letra_('a' + rand() % (('z' - 'a') + 1)),
+numero_(00000000 + rand() % (99999999 + 1)),
+letra_('a' + rand() % (('z' - 'a') + 1))
 //letra_('a'),
 //nombre_("david")
 {}
