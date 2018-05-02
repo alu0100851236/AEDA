@@ -41,6 +41,7 @@ class ABB{
 		void eliminar(T);
 		void eliminarRama (NodoBB<T>* &, T);
 		void verArbol();
+		void verArbol(NodoBB<T>* raiz, int n);
 
 		// METODOS PARA LAS ESTADÍSTICAS
 		int getNumBusqueda();
@@ -186,205 +187,44 @@ void ABB<T>:: setNumInsercion(int valor){
 
 template <class T>
 void ABB<T>::verArbol(){
-	if (raiz_ != NULL){
-		queue<NodoBB<T>*> lista;
-		lista.push(raiz_);
-		int niv = 0;
-		int i = 1;
-		int k = 0;
-		int aux = 0;
-		contarnodos();
+	verArbol(raiz_, 0);
+}
 
-		cout << endl << "## El número de nodos es, " << numNodos << endl;
+template <class T>
+void ABB<T>::verArbol(NodoBB<T>* raiz, int n){
+	queue<NodoBB<T>*> cola;
 
-		while (k < numNodos && !lista.empty()){
-			if (lista.front() != NULL){
-//				cout << endl << "Entra en el if (lista.front() != NULL)" << endl;
-//				cout << "aux, " << aux << endl;
-				cout << endl << " ------------------------------------------" << endl;
-				cout << " = NIV: " << niv << endl;
-				cout << " = aux: " << aux << endl;
-				cout << "Raiz_->clave: " << raiz_->clave_ << endl;
-				cout << "Raiz_->izquierdo: " << raiz_->izquierdo_ << endl;
-				cout << "Raiz_->derecho: " << raiz_->derecho_ << endl;
-				cout << " = lista.front()->clave_: " << lista.front()->clave_ << endl;
-				cout << " = lista.front()->izquierdo_" << lista.front()->izquierdo_ << endl;
-				cout << " = lista.front()->derecho_" << lista.front()->derecho_ << endl;
-				cout << " ------------------------------------------" << endl << endl;
-				if (aux == 0){
-//					cout << endl << "ENTRA EN EL AUX == 0" << endl;
-//				if (aux == 0 && niv == 0){
-					cout << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "] [dcho]";
+	if(raiz_ != NULL){
+		cola.push(raiz_);
+    }
+    else
+    	cout << "[.]";
 
-					if (k == numNodos - 1){
-						cout << endl << "  -> Nivel " << niv+1 << ":";
-						for (int n = 0; n <= i*2 ; n++)
-							cout << " [.]";
-					}
+    int i = 1;
+    int niv = 1;
 
-					aux = 1;
-//
-//					if (lista.front()->izquierdo_ == NULL){
-//						cout << endl << "  -> Nivel " << niv+1 << ": [izq]";
-//						if (lista.front()->derecho_ == NULL)
-//							cout << " [dcho]";
-//						else
-//							cout << " [" << lista.front()->clave_ << "]";
-//					}
-//					else{
-//						cout << endl << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//						if (lista.front()->derecho_ == NULL)
-//							cout << " [dcho]";
-//						else
-//							cout << " [" << lista.front()->clave_ << "]";
-//					}
-//
-//					if (lista.front()->derecho_ == NULL)
-//						cout << " [dcho]";
+    NodoBB<T>* aux;
+    while (!cola.empty()){
+    	cout << "  -> Nivel " << niv++ << ": ";
+    	for (int c = 0; c < i; c++){
+    		if (cola.empty())
+    			break;
 
-//					aux = 1;
-				}
+    		cout << " ";
+    		aux = cola.front();
+    		cola.pop();
 
-//				if (aux == 0 && niv > 0){
-//					cout << "Entra en el if (niv > 0)" << endl;
-//					cout << endl << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//					if (lista.front()->izquierdo_ == NULL)
-//						cout << endl << "  -> Nivel " << niv << ": [izq]";
-//					else
-//						cout << endl << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//
-//					if (lista.front()->derecho_ == NULL)
-//						cout << " [dcho]";
-//					else
-//						cout << " [" << lista.front()->clave_ << "]";
-//					aux = 1;
-//				}
+    		if (aux == NULL)
+    			cout << "[.]";
+    		else{
+    			cout << "[" << aux->clave_ << "]";
+    			cola.push(aux->izquierdo_);
+    			cola.push(aux->derecho_);
+    		}
+    	}
 
-				// AUX == 1 RAMA DERECHA
-				else if (aux == 1){
-					cout << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
+    	i = cola.size();
+    	cout << endl;
+    }
 
-					if (k == numNodos - 1){
-						cout << endl << "  -> Nivel " << niv+1 << ":";
-						for (int n = 0; n <= i*2 ; n++)
-							cout << " [.]";
-					}
-				}
-				lista.push (lista.front()->izquierdo_);
-				lista.push (lista.front()->derecho_);
-
-//				cout << endl << " ------------------------------------------" << endl;
-//				cout << " = NIV: " << niv << endl;
-//				cout << " = aux: " << aux << endl;
-//				cout << "Raiz_->clave: " << raiz_->clave_ << endl;
-////				cout << "Raiz_->dato: " << raiz_->izquierdo_ << endl;
-//				cout << " = lista.front()->clave_: " << lista.front()->clave_ << endl;
-//				cout << " = lista.front()->izquierdo_" << lista.front()->izquierdo_ << endl;
-//				cout << " = lista.front()->derecho_" << lista.front()->derecho_ << endl;
-//				cout << " ------------------------------------------" << endl << endl;
-//
-//				if (niv == 0){
-//					if ((lista.front()->izquierdo_ == NULL) && (lista.front()->derecho_ == NULL)){
-//						cout << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//						cout << endl << "  -> Nivel " << niv+1 << ": [izq] [dcho]";
-//					}
-//					else{
-//						cout << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//					}
-//
-////					if (lista.front()->derecho_ == NULL)
-////						cout << " [dcho]";
-////					else
-////						cout << " [ d: " << lista.front()->derecho_ << "]";
-//				}
-//				else if ((lista.front()->izquierdo_ == NULL) && (lista.front()->derecho_ == NULL) && (niv > 0)){
-//					cout << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "]";
-//					cout << endl << "  -> Nivel " << niv+1 << ": [izq] [dcho]";
-//				}
-//				else if ((lista.front()->izquierdo_ != NULL) && (lista.front()->derecho_ == NULL) && (niv > 0)){
-//					cout << endl << "  -> Nivel " << niv << ": [" << lista.front()->clave_ << "] [dcho]";
-////					cout << endl << "  -> Nivel " << niv+1 << ": [" << lista.front()->clave_ << "] [dcho]";
-////					if (lista.front()->derecho_ == NULL)
-////						cout << " [dcho]";
-////					else
-////						cout << " [ i: " << lista.front()->clave_ << "]";
-//				}
-//				else if ((lista.front()->izquierdo_ == NULL) && (lista.front()->derecho_ != NULL) && (niv > 0))
-//					cout << endl << "  -> Nivel " << niv << ": [izq] [" << lista.front()->clave_ << "]";
-////					cout << endl << "  -> Nivel " << niv+1 << ": [izq] [" << lista.front()->clave_ << "]";
-//
-//				else if ((lista.front()->izquierdo_ != NULL) && (lista.front()->derecho_ != NULL) && (niv > 0))
-//					cout << endl << "  -> Nivel " << niv+1 << ": [" << lista.front()->clave_ << "] [" << lista.front()->clave_ << "]";
-
-//				}
-//				else if (niv > 0 ){
-//					cout << endl << "  -> Nivel- " << niv << ": [" << lista.front()->clave_ << "]";
-//					if (lista.front()->derecho_ == NULL)
-//						cout << " [dcho]";
-//					else
-//						cout << " [ i: " << lista.front()->clave_ << "]";
-//				}
-
-
-			}
-			else{
-				cout << endl << " ------------------------------------------" << endl;
-				cout << " = NIV: " << niv << endl;
-				cout << " = k: " << k << endl;
-				cout << "Raiz_->clave: " << raiz_->clave_ << endl;
-				cout << "Raiz_->izq: " << raiz_->izquierdo_ << endl;
-//				cout << " = lista.front()->clave_: " << lista.front()->clave_ << endl;
-//				cout << " = lista.front()->izquierdo_" << lista.front()->izquierdo_ << endl;
-//				cout << " = lista.front()->derecho_" << lista.front()->derecho_ << endl;
-				cout << " ------------------------------------------" << endl << endl;
-
-				if (aux == 0){
-					cout << "  -> Nivel " << niv << ": [izq]";
-					aux = 1;
-					k--;
-				}
-//				lista.push(NULL);
-//				lista.push(NULL);
-			}
-
-//			if (k == numNodos - 1){
-//				if (lista.front()->izquierdo_ == NULL)
-//					cout << endl << "  -> Nivel " << niv+1 << ": [izq]";
-//				if (lista.front()->derecho_ == NULL)
-//					cout << " [dcho]";
-//			}
-
-//			if (lista.front() != NULL){
-//				cout << " [" << lista.front()->clave_ << "]";
-//			}
-//			else{
-//				cout << " [.]";
-//				k--;
-//			}
-
-//			cout << endl << " == antes del pop, " << lista.front()->clave_ << endl;
-			lista.pop();
-
-
-			// CONTROLAMOS LAS POTENCIAS DE DOS PARA SABER SI SALTO AL SIGUIENTE NIVEL
-//			cout << endl << "## i: " << i << endl;
-//			cout << "## pow(2,niv): " << pow(2,niv) << endl;
-			if (i == pow(2,niv)){
-				cout << endl << endl << "==========================" << endl;
-				cout << "Se produce un salto de nivel" << endl;
-				niv++;
-				aux = 0;
-				i = 0;
-				cout << endl;
-			}
-
-			cout << endl << "i: " << i << endl;
-			i++;
-			k++;
-		}
-	}
-	else{
-		cout << "Árbol vacío" << endl;
-	}
-	cout << endl;
 }

@@ -57,6 +57,9 @@ int main(){
     						switch(opcion){
     							case 1:
     								{
+    									char letra = 'a' + rand() % (('z' - 'a') + 1);
+    									string arrayNombres[10] = {"Carlos", "Daniel", "Nacho", "David", "Elena", "Karla", "Paula", "Eloisa", "Fernando", "Yaiza"};
+    									srand(time(NULL));
     									if (valor_dni == 0){
     										cout << endl << "  # ARBOL VACÍO" << endl;
     										cout << "  -> Nivel 0: [.]" << endl;
@@ -65,7 +68,7 @@ int main(){
     									cout << "  ================" << endl;
     									cout << "  # DNI A INSERTAR: ";
     									cin >> dni;
-    									valor_dni.setDni(dni);
+    									valor_dni.setDni(dni, letra, arrayNombres[rand() % 10]);
     									arbol.insertar(valor_dni, false);
     									arbol.verArbol();
     									cout << endl;
