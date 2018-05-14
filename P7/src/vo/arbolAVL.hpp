@@ -302,8 +302,8 @@ void ArbolAVL<T>::eliminar_re_balancea_dcha(NodoAVL<T>* &nodo, bool& decrece){
 template <class T>
 NodoAVL<T>* ArbolAVL<T>::buscar(T clave, int* numComparacionesB){
 	NodoAVL<T>* nodo2;
-	nodo2 = new ArbolAVL<T>(clave);
-	return buscarRama(raiz_, nodo2, numComparacionesB);
+	nodo2 = new NodoAVL<T>(clave);
+	return Buscar(raiz_, nodo2, numComparacionesB);
 }
 
 template <class T>

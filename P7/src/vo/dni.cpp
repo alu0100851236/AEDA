@@ -64,12 +64,11 @@ bool DNI::operator == (DNI& dni){
 
 bool DNI::operator < (DNI& dni){
 	if(getDni() < dni.getDni()){
-		if(getDni() == dni.getDni())
-			if(int(getDniLetra()) < int(dni.getDniLetra()))
-				return true;
-			else
-				return false;
-		return true;
+		if((getDni() == dni.getDni()) == true){
+			return true;
+		}
+		else
+			return false;
 	}
 	else{
 		return false;
@@ -78,12 +77,11 @@ bool DNI::operator < (DNI& dni){
 
 bool DNI::operator > (DNI& dni){
 	if(getDni() > dni.getDni()){
-		if(getDni() == dni.getDni())
-			if(int(getDniLetra()) < int(dni.getDniLetra()))
-				return true;
-			else
-				return false;
-		return true;
+		if((getDni() == dni.getDni()) == true){
+			return true;
+		}
+		else
+			return false;
 	}
 	else{
 		return false;
